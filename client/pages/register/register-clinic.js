@@ -7,6 +7,9 @@ import web3 from '../../../backend/server/web3';
 class RegisterClinic extends Component {
     state = {
         reg_no: '',
+        name: '',
+        location: '',
+        contact: '',
         loading: false,
         errorMessage: ''
     };
@@ -14,7 +17,7 @@ class RegisterClinic extends Component {
     onSubmit = async event => {
         event.preventDefault();
 
-        const { reg_no } = this.state;
+        const { reg_no, name, location, contact } = this.state;
 
         this.setState({loading: true, errorMessage: ''});
 
@@ -22,7 +25,7 @@ class RegisterClinic extends Component {
             const accounts = await web3.eth.getAccounts();
 
             await record.methods.setClinic(
-                reg_no
+                reg_no, name, location, contact
             ).send({ from: accounts[0] });
 
             alert("Clinic registered successfully!");
@@ -32,7 +35,13 @@ class RegisterClinic extends Component {
             alert("This Clinic is already registered");
         }
 
-        this.setState({ loading: false, reg_no: ''});
+        this.setState({
+            loading: false,
+            reg_no: '',
+            name: '',
+            location: '',
+            contact: ''
+        });
     }
 
     render() {
@@ -48,6 +57,36 @@ class RegisterClinic extends Component {
                                 value={this.state.reg_no}
                                 onChange={event =>
                                     this.setState({ reg_no: event.target.value })}
+                            />
+                        </Form.Field>
+
+                        <Form.Field>
+                            <label>Name</label>
+                            <Input
+                                placeholder='Clinic Name'
+                                value={this.state.name}
+                                onChange={event =>
+                                    this.setState({ name: event.target.value })}
+                            />
+                        </Form.Field>
+
+                        <Form.Field>
+                            <label>Location</label>
+                            <Input
+                                placeholder='Clinic Location'
+                                value={this.state.location}
+                                onChange={event =>
+                                    this.setState({ location: event.target.value })}
+                            />
+                        </Form.Field>
+
+                        <Form.Field>
+                            <label>Contact</label>
+                            <Input
+                                placeholder='Clinic Contact'
+                                value={this.state.contact}
+                                onChange={event =>
+                                    this.setState({ contact: event.target.value })}
                             />
                         </Form.Field>
 

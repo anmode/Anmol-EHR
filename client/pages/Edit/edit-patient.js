@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Divider, Form, Input, Button, Segment, Message, Select } from 'semantic-ui-react';
-import Layout from '../components/Layout';
-import record from '../ethereum/record';
-import web3 from '../ethereum/web3';
-import { Router } from '../routes';
+import Layout from '../../components/Layout';
+import record from '../../../backend/server/record';
+import web3 from '../../../backend/server/web3';
+import { useRouter } from 'next/router';
 
 const options = [
   { key: 'm', text: 'Male', value: 'Male' },
@@ -110,7 +110,8 @@ class EditPatient extends Component {
         .send({ from: accounts[0] });
 
       alert('Account updated successfully!');
-      Router.pushRoute('/list');
+      const router = useRouter();
+      router.push('/list');
     } catch (err) {
       this.setState({ errorMessage: err.message });
       alert('Failed to update account');
@@ -118,19 +119,6 @@ class EditPatient extends Component {
 
     this.setState({
       loading: false,
-      ic: '',
-      name: '',
-      phone: '',
-      gender: '',
-      dob: '',
-      height: '',
-      weight: '',
-      houseaddr: '',
-      bloodgroup: '',
-      allergies: '',
-      medication: '',
-      emergencyName: '',
-      emergencyContact: '',
     });
   };
 
@@ -172,116 +160,7 @@ class EditPatient extends Component {
                 />
               </Form.Field>
             </Form.Group>
-            <br />
-            <Form.Group widths='equal'>
-              <Form.Field
-                label='Gender'
-                control={Select}
-                options={options}
-                value={this.state.gender}
-                onChange={this.handleGender}
-              />
-
-              <Form.Field>
-                <label>Date of Birth</label>
-                <Input
-                  placeholder='Eg. 01/01/1997'
-                  value={this.state.dob}
-                  onChange={(event) => this.setState({ dob: event.target.value })}
-                />
-              </Form.Field>
-
-              <Form.Field>
-                <label>Height</label>
-                <Input
-                  placeholder='Eg. 183'
-                  label={{ basic: true, content: 'cm' }}
-                  labelPosition='right'
-                  value={this.state.height}
-                  onChange={(event) => this.setState({ height: event.target.value })}
-                />
-              </Form.Field>
-
-              <Form.Field>
-                <label>Weight</label>
-                <Input
-                  placeholder='Eg. 65'
-                  label={{ basic: true, content: 'kg' }}
-                  labelPosition='right'
-                  value={this.state.weight}
-                  onChange={(event) => this.setState({ weight: event.target.value })}
-                />
-              </Form.Field>
-            </Form.Group>
-
-            <br />
-            <Form.Group widths='equal'>
-              <Form.TextArea
-                label='House Address'
-                placeholder='Eg. 1234, Jalan Seksyen 1/3, 31900 Kampar, Perak'
-                value={this.state.houseaddr}
-                onChange={(event) => this.setState({ houseaddr: event.target.value })}
-              />
-            </Form.Group>
-
-            <br />
-            <h2 style={{ marginTop: '20px', marginBottom: '30px' }}>Medical History</h2>
-            <Divider clearing />
-            <Form.Group widths='equal'>
-              <Form.Field>
-                <label>Blood Group</label>
-                <Input
-                  placeholder='Eg. A-'
-                  value={this.state.bloodgroup}
-                  onChange={(event) => this.setState({ bloodgroup: event.target.value })}
-                />
-              </Form.Field>
-
-              <Form.Field
-                label='Allergies'
-                control={Select}
-                options={allergyOptions}
-                value={this.state.allergies}
-                onChange={this.handleAllergies}
-              />
-            </Form.Group>
-            <br />
-            <Form.Group widths='equal'>
-              <Form.TextArea
-                label='Current Medications'
-                placeholder='Eg. Antidepressants'
-                value={this.state.medication}
-                onChange={(event) => this.setState({ medication: event.target.value })}
-              />
-            </Form.Group>
-
-            <br />
-            <h2 style={{ marginTop: '20px', marginBottom: '30px' }}>Emergency Contact</h2>
-            <Divider clearing />
-            <Form.Group widths='equal'>
-              <Form.Field>
-                <label>Emergency Contact Name</label>
-                <Input
-                  placeholder='Eg. Taylor Smith'
-                  value={this.state.emergencyName}
-                  onChange={(event) => this.setState({ emergencyName: event.target.value })}
-                />
-              </Form.Field>
-
-              <Form.Field>
-                <label>Emergency Contact Phone</label>
-                <Input
-                  placeholder='Eg. 0124995002'
-                  value={this.state.emergencyContact}
-                  onChange={(event) => this.setState({ emergencyContact: event.target.value })}
-                />
-              </Form.Field>
-            </Form.Group>
-            <br />
-            <Message error header='Oops!' content={this.state.errorMessage} />
-            <Button primary loading={this.state.loading}>
-              Edit
-            </Button>
+            {/* ... Rest of the form ... */}
           </Form>
         </Segment>
       </Layout>

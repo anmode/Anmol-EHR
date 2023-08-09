@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Card, Icon, Image, Segment, Message, Statistic } from 'semantic-ui-react';
-import { AreaChart, Area, LineChart, Line, PieChart, Pie, Sector, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, AreaChart, Area, LineChart, Line, PieChart, Pie, Sector, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 // import { Link } from '../routes';
 import Layout from '../components/Layout';
 import record from '../../backend/server/record';
@@ -401,6 +401,22 @@ export default class Dashboard extends PureComponent {
               </Card.Content>
             </Card>
 
+            <Card>
+  <Card.Content>
+    <Image
+      floated='right'
+      size='mini'
+      src='https://cdn-icons-png.flaticon.com/512/3117/3117793.png'
+    />
+    <Card.Header>Number of Diagnostics</Card.Header>
+  </Card.Content>
+  <Card.Content extra>
+    <Statistic size='small'>
+      <Statistic.Value>{this.props.diagnosticCount}</Statistic.Value>
+    </Statistic>
+  </Card.Content>
+</Card>
+
           </Card.Group>
 
           <Segment padded>
@@ -436,6 +452,33 @@ export default class Dashboard extends PureComponent {
               </AreaChart>
             </ResponsiveContainer>
           </Segment>
+
+          <Segment padded>
+  <h3 style={{ textAlign: "center" }}>Number of Hospitals, Clinics, and Diagnostics</h3>
+  <ResponsiveContainer width="100%" aspect={2.15}>
+    <BarChart
+      width={500}
+      height={300}
+      data={[
+        { name: 'Hospitals', count: this.props.hospitalCount },
+        { name: 'Clinics', count: this.props.clinicCount },
+        { name: 'Diagnostics', count: this.props.diagnosticCount },
+      ]}
+      margin={{
+        top: 10,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Bar dataKey="count" fill="#8884d8" />
+    </BarChart>
+  </ResponsiveContainer>
+         </Segment>
 
           <Segment padded>
             <h3 style={{ textAlign: "center" }}>Number of Appointments in 2022</h3>
@@ -482,6 +525,7 @@ export default class Dashboard extends PureComponent {
               </PieChart>
             </ResponsiveContainer>
           </Segment>
+
         </>
       </Layout>
     );

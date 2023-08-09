@@ -1,7 +1,8 @@
 pragma solidity ^0.4.17;
 
 contract Record {
-    
+    enum UserRole { Anmol, Patient, Doctor, Hospital, Clinic }
+
     struct Patients{
         string aadhaar;
         string name;
@@ -62,6 +63,9 @@ contract Record {
         uint date;
     }
 
+    // Mapping to store the roles assigned to each user
+    mapping(address => UserRole) public userRoles;
+
     address public owner;
     address[] public patientList;
     address[] public doctorList;
@@ -115,6 +119,7 @@ contract Record {
         p.addr = msg.sender;
         p.date = block.timestamp;
         
+        userRoles[msg.sender] = UserRole.Patient;
         patientList.push(msg.sender);
         isPatient[msg.sender] = true;
         isApproved[msg.sender][msg.sender] = true;
@@ -156,7 +161,8 @@ contract Record {
         d.major = _major;
         d.addr = msg.sender;
         d.date = block.timestamp;
-        
+
+        userRoles[msg.sender] = UserRole.Doctor;
         doctorList.push(msg.sender);
         isDoctor[msg.sender] = true;
         doctorCount++;
@@ -223,6 +229,7 @@ contract Record {
         h.addr = msg.sender;
         h.date = block.timestamp;
 
+        userRoles[msg.sender] = UserRole.Hospital;
         hospitalsList.push(msg.sender);
         isHospital[msg.sender] = true;
         hospitalCount++;
@@ -239,6 +246,7 @@ contract Record {
         c.addr = msg.sender;
         c.date = block.timestamp;
 
+        userRoles[msg.sender] = UserRole.Clinic;
         clinicsList.push(msg.sender);
         isClinic[msg.sender] = true;
         clinicCount++;
@@ -371,5 +379,10 @@ contract Record {
     //Retrieve permission granted count
     function getAppointmentPerPatient(address _address) public view returns(uint256) {
         return AppointmentPerPatient[_address];
+    }
+
+     // Function to get the role of a user
+    function getUserRole(address _address) public view returns (UserRole) {
+        return userRoles[_address];
     }
 }

@@ -45,7 +45,7 @@ export default class MenuBar extends Component {
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link route='/edit-doctor'>
+                  <Link route='/edit/edit-doctor'>
                     <a style={{color:'black'}}>Edit Profile</a>
                   </Link>
                 </Dropdown.Item>
@@ -70,7 +70,7 @@ export default class MenuBar extends Component {
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link route='/edit-patient'>
+                  <Link route='/edit/edit-patient'>
                     <a style={{color:'black'}}>Edit Profile</a>
                   </Link>
                 </Dropdown.Item>
