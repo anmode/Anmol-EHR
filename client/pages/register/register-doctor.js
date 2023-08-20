@@ -37,7 +37,7 @@ class RegisterDoctor extends Component {
     onSubmit = async event => {
         event.preventDefault();
 
-        const { ic, name, phone, gender, dob, qualification, major } = this.state;
+        const { aadhaar, name, phone, gender, dob, qualification, major } = this.state;
 
         this.setState({loading: true, errorMessage: ''});
 
@@ -45,7 +45,7 @@ class RegisterDoctor extends Component {
             const accounts = await web3.eth.getAccounts();
 
             await record.methods.setDoctor(
-                ic, name, phone, gender, dob, qualification, major
+                aadhaar, name, phone, gender, dob, qualification, major
             ).send({ from: accounts[0] });
 
             alert("Doctor account created successfully!");
@@ -55,7 +55,7 @@ class RegisterDoctor extends Component {
             alert("This Doctor account already exists");
         }
 
-        this.setState({ loading: false, ic: '', name: '', phone: '', gender: '', dob: '', qualification: '', major: ''});
+        this.setState({ loading: false, aadhaar: '', name: '', phone: '', gender: '', dob: '', qualification: '', major: ''});
     }
 
     render() {
@@ -73,7 +73,7 @@ class RegisterDoctor extends Component {
                                 placeholder = 'Eg. 001234010234'                
                                 value= {this.state.aadhaar}
                                 onChange= {event => 
-                                    this.setState({ ic: event.target.value })}                           
+                                    this.setState({ aadhaar: event.target.value })}                           
                             />
                         </Form.Field>
 

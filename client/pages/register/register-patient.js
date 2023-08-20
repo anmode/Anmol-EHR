@@ -63,7 +63,7 @@ class RegisterPatient extends Component {
             alert("Account already exists");
         }
 
-        this.setState({ loading: false, ic: '', name: '', phone: '', gender: '', dob: '', height: '', weight: '', houseaddr: '', bloodgroup: '', allergies: '', medication: '', emergencyName: '', emergencyContact: ''});
+        this.setState({ loading: false, aadhaar: '', name: '', phone: '', gender: '', dob: '', height: '', weight: '', houseaddr: '', bloodgroup: '', allergies: '', medication: '', emergencyName: '', emergencyContact: ''});
     }
 
     render() {
@@ -81,7 +81,7 @@ class RegisterPatient extends Component {
                                 placeholder = 'Eg. 001234010234'                
                                 value= {this.state.aadhaar}
                                 onChange= {event => 
-                                    this.setState({ ic: event.target.value })}                           
+                                    this.setState({ aadhaar: event.target.value })}                           
                             />
                         </Form.Field>
 
