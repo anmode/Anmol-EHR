@@ -21,7 +21,7 @@ const qualificationOptions = [
 
 class EditDoctor extends Component {
   state = {
-    ic: '',
+    aadhaar: '',
     name: '',
     phone: '',
     gender: '',
@@ -45,7 +45,7 @@ class EditDoctor extends Component {
       const doctorDetails = await record.methods.searchDoctor(doctorAddress).call();
       console.log('Doctor Details:', doctorDetails);
       this.setState({
-        ic: doctorDetails[0],
+        aadhaar: doctorDetails[0],
         name: doctorDetails[1],
         phone: doctorDetails[2],
         gender: doctorDetails[3],
@@ -61,7 +61,7 @@ class EditDoctor extends Component {
   onSubmit = async (event) => {
     event.preventDefault();
 
-    const { ic, name, phone, gender, dob, qualification, major } = this.state;
+    const { aadhaar, name, phone, gender, dob, qualification, major } = this.state;
 
     this.setState({ loading: true, errorMessage: '' });
 
@@ -69,7 +69,7 @@ class EditDoctor extends Component {
       const accounts = await web3.eth.getAccounts();
 
       await record.methods
-        .editDoctor(ic, name, phone, gender, dob, qualification, major)
+        .editDoctor(aadhaar, name, phone, gender, dob, qualification, major)
         .send({ from: accounts[0] });
 
       alert('Doctor account updated successfully!');
@@ -80,7 +80,7 @@ class EditDoctor extends Component {
 
     this.setState({
       loading: false,
-      ic: '',
+      aadhaar: '',
       name: '',
       phone: '',
       gender: '',
@@ -102,10 +102,10 @@ class EditDoctor extends Component {
           <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
             <Form.Group widths='equal'>
               <Form.Field>
-                <label>IC</label>
+                <label>Aadhaar Number</label>
                 <Input
                   placeholder='Eg. 001234010234'
-                  value={this.state.ic}
+                  value={this.state.aadhaar}
                   onChange={(event) => this.setState({ ic: event.target.value })}
                 />
               </Form.Field>

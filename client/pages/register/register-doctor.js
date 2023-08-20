@@ -19,7 +19,7 @@ const qualificationOptions = [
 
 class RegisterDoctor extends Component {
     state = {
-        ic: '',
+        aadhaar: '',
         name: '',
         phone: '',
         gender: '',
@@ -68,10 +68,10 @@ class RegisterDoctor extends Component {
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Group widths='equal'>
                         <Form.Field>
-                            <label>IC</label>
+                            <label>Aadhaar Number</label>
                             <Input
                                 placeholder = 'Eg. 001234010234'                
-                                value= {this.state.ic}
+                                value= {this.state.aadhaar}
                                 onChange= {event => 
                                     this.setState({ ic: event.target.value })}                           
                             />
