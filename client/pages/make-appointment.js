@@ -73,7 +73,7 @@ class MakeAppointment extends Component {
                     <Form.Field>
                             <label>Date</label>
                             <Input
-                                placeholder = 'Eg. 10/10/2022'                        
+                                placeholder = 'Eg. 10/10/2023'                        
                                 value= {this.state.date}
                                 onChange= {event => 
                                     this.setState({ date: event.target.value })}                           

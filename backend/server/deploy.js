@@ -27,7 +27,7 @@ const deploy = async () => {
 
     // Write the contract address to record.js
     const recordJsContent = `import web3 from './web3';
-import Record from './build/Record.json';
+import Record from '../build/Record.json';
 
 const instance = new web3.eth.Contract(
   JSON.parse(Record.interface),

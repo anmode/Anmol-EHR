@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Divider, Form, Input, Button, Segment, Message, Select } from 'semantic-ui-react';
-import Layout from '../components/Layout';
-import record from '../ethereum/record';
-import web3 from '../ethereum/web3';
-import { Router } from '../routes';
+import { Link } from '../../../backend/routes';
+import { Router } from '../../../backend/routes';
+import web3 from '../../../backend/server/web3';
+import Layout from '../../components/Layout';
+import record from '../../../backend/server/record';
 
 const options = [
   { key: 'm', text: 'Male', value: 'Male' },
@@ -20,7 +21,7 @@ const allergyOptions = [
 
 class EditPatient extends Component {
   state = {
-    ic: '',
+    aadhaar: '',
     name: '',
     phone: '',
     gender: '',
@@ -46,9 +47,9 @@ class EditPatient extends Component {
       const accounts = await web3.eth.getAccounts();
       const patientAddress = accounts[0];
 
-      const patientDetails = await record.methods.getPatient(patientAddress).call();
+      const patientDetails = await record.methods.searchPatientDemographic(patientAddress).call();
       this.setState({
-        ic: patientDetails.ic,
+        aadhaar: patientDetails.aadhaar,
         name: patientDetails.name,
         phone: patientDetails.phone,
         gender: patientDetails.gender,
@@ -71,7 +72,7 @@ class EditPatient extends Component {
     event.preventDefault();
 
     const {
-      ic,
+      aadhaar,
       name,
       phone,
       gender,
@@ -93,7 +94,7 @@ class EditPatient extends Component {
 
       await record.methods
         .editDetails(
-          ic,
+          aadhaar,
           name,
           phone,
           gender,
@@ -118,7 +119,7 @@ class EditPatient extends Component {
 
     this.setState({
       loading: false,
-      ic: '',
+      aadhaar: '',
       name: '',
       phone: '',
       gender: '',
@@ -146,11 +147,11 @@ class EditPatient extends Component {
           <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
             <Form.Group widths='equal'>
               <Form.Field>
-                <label>IC</label>
+                <label>Aadhaar Number</label>
                 <Input
                   placeholder='Eg. 001234010234'
-                  value={this.state.ic}
-                  onChange={(event) => this.setState({ ic: event.target.value })}
+                  value={this.state.aadhaar}
+                  onChange={(event) => this.setState({ aadhaar: event.target.value })}
                 />
               </Form.Field>
 
@@ -162,6 +163,7 @@ class EditPatient extends Component {
                   onChange={(event) => this.setState({ name: event.target.value })}
                 />
               </Form.Field>
+
 
               <Form.Field>
                 <label>Phone</label>

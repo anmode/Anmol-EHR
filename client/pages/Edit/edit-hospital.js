@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Divider, Form, Input, Button, Segment, Message } from 'semantic-ui-react';
+import { Link } from '../../../backend/routes';
+import { Router } from '../../../backend/routes';
+import web3 from '../../../backend/server/web3';
 import Layout from '../../components/Layout';
-import record from '../../ethereum/record';
-import web3 from '../../ethereum/web3';
-import { Router } from '../../routes';
+import record from '../../../backend/server/record';
 
 class EditHospital extends Component {
     state = {

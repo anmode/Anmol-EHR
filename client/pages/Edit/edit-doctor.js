@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Divider, Form, Input, Button, Segment, Message, Select } from 'semantic-ui-react';
-import Layout from '../components/Layout';
-import record from '../ethereum/record';
-import web3 from '../ethereum/web3';
-
+import { Link } from '../../../backend/routes';
+import { Router } from '../../../backend/routes';
+import web3 from '../../../backend/server/web3';
+import Layout from '../../components/Layout';
+import record from '../../../backend/server/record';
 const genderOptions = [
   { key: 'm', text: 'Male', value: 'Male' },
   { key: 'f', text: 'Female', value: 'Female' },
@@ -39,8 +40,10 @@ class EditDoctor extends Component {
     try {
       const accounts = await web3.eth.getAccounts();
       const doctorAddress = accounts[0];
-
+      console.log('Doctor Address:', doctorAddress);
+  
       const doctorDetails = await record.methods.searchDoctor(doctorAddress).call();
+      console.log('Doctor Details:', doctorDetails);
       this.setState({
         ic: doctorDetails[0],
         name: doctorDetails[1],

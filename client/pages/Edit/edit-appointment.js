@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Divider, Form, Input, Button, Segment, Message, Select } from 'semantic-ui-react';
-import Layout from '../components/Layout';
-import record from '../ethereum/record';
-import web3 from '../ethereum/web3';
-import { Router } from '../routes';
+import { Link } from '../../../backend/routes';
+import { Router } from '../../../backend/routes';
+import web3 from '../../../backend/server/web3';
+import Layout from '../../components/Layout';
+import record from '../../../backend/build/Record.json'
 
 const statusOptions = [
   { key: 'p', text: 'Pending', value: 'Pending' },
@@ -104,7 +105,7 @@ class EditAppointment extends Component {
               <Form.Field>
                 <label>Date</label>
                 <Input
-                  placeholder='Eg. 10/10/2022'
+                  placeholder='Eg. 10/10/2023'
                   value={this.state.date}
                   onChange={(event) => this.setState({ date: event.target.value })}
                 />

@@ -20,7 +20,7 @@ const allergyOptions = [
 
 class RegisterPatient extends Component {
     state = {
-        ic: '',
+        aadhaar: '',
         name: '',
         phone: '',
         gender: '',
@@ -44,7 +44,7 @@ class RegisterPatient extends Component {
     onSubmit = async event => {
         event.preventDefault();
 
-        const { ic, name, phone, gender, dob, height, weight, houseaddr, bloodgroup, allergies, medication, emergencyName, emergencyContact } = this.state;
+        const { aadhaar, name, phone, gender, dob, height, weight, houseaddr, bloodgroup, allergies, medication, emergencyName, emergencyContact } = this.state;
 
         this.setState({loading: true, errorMessage: ''});
 
@@ -52,7 +52,7 @@ class RegisterPatient extends Component {
             const accounts = await web3.eth.getAccounts();
 
             await record.methods.setDetails(
-                ic, name, phone, gender, dob, height, weight, houseaddr, bloodgroup, allergies, medication, emergencyName, emergencyContact
+                aadhaar, name, phone, gender, dob, height, weight, houseaddr, bloodgroup, allergies, medication, emergencyName, emergencyContact
             ).send({ from: accounts[0] });
 
             alert("Account created successfully!");
@@ -76,10 +76,10 @@ class RegisterPatient extends Component {
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Group widths='equal'>
                         <Form.Field>
-                            <label>IC</label>
+                            <label>Aadhaar Number</label>
                             <Input
                                 placeholder = 'Eg. 001234010234'                
-                                value= {this.state.ic}
+                                value= {this.state.aadhaar}
                                 onChange= {event => 
                                     this.setState({ ic: event.target.value })}                           
                             />
