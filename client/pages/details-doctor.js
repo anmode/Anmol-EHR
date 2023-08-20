@@ -18,7 +18,7 @@ class DoctorDetails extends Component {
             profilePic = (doctor[3] == 'Male') ? 'https://cdn-icons-png.flaticon.com/128/387/387561.png' : 'https://cdn-icons-png.flaticon.com/128/387/387569.png';
             
             return {
-                ic: doctor[0],
+                aadhaar: doctor[0],
                 name: doctor[1],
                 phone: doctor[2],
                 gender: doctor[3],
@@ -55,8 +55,8 @@ class DoctorDetails extends Component {
                                 <div>{this.props.name}</div>
                             </Grid.Column>
                             <Grid.Column>
-                                <b style={{color:'grey'}}>IC</b>
-                                <div>{this.props.ic}</div>
+                                <b style={{color:'grey'}}>Aadhaar Number</b>
+                                <div>{this.props.aadhaar}</div>
                             </Grid.Column>
                             <Grid.Column>
                                 <b style={{color:'grey'}}>Gender</b>

@@ -23,7 +23,7 @@ class RecordDetails extends Component {
             profilePic = (records[3] == 'Male') ? 'https://cdn-icons-png.flaticon.com/128/3135/3135715.png' : 'https://cdn-icons-png.flaticon.com/512/3135/3135789.png';
             
             return {
-                ic: records[0],
+                aadhaar: records[0],
                 name: records[1],
                 phone: records[2],
                 gender: records[3],
@@ -66,8 +66,8 @@ class RecordDetails extends Component {
                     <Segment>
                         <h2 style={{marginBottom:'25px'}}>{this.props.name}</h2>
                         <Grid columns={2}><Grid.Row>
-                            <Grid.Column><b style={{color:'grey'}}>IC</b></Grid.Column>
-                            <Grid.Column><b>{this.props.ic}</b></Grid.Column>
+                            <Grid.Column><b style={{color:'grey'}}>Aadhaar Number</b></Grid.Column>
+                            <Grid.Column><b>{this.props.aadhaar}</b></Grid.Column>
                         </Grid.Row></Grid>
                         <Grid columns={2}><Grid.Row>
                             <Grid.Column><b style={{color:'grey'}}>Phone</b></Grid.Column>
